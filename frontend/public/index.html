@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" type="image/x-icon" href="%PUBLIC_URL%/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png" />
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#31297C" />
+  <meta name="description"
+    content="Meteoroid Services provides end‑to‑end medical billing and revenue cycle management (RCM) for healthcare providers across the U.S.—claims, denials, AR follow‑up, and transparent reporting." />
+    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <meta property="og:image" content="%PUBLIC_URL%/header_logo.png" />
+  <meta name="twitter:image" content="%PUBLIC_URL%/header_logo.png" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://meteoroidservices.com/" />
+
+  <!-- Robots -->
+  <meta name="robots" content="index, follow" />
+
+  <!-- Application & Author -->
+  <meta name="application-name" content="Meteoroid Services" />
+  <meta name="author" content="Meteoroid Services" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Meteoroid Services | Medical Billing & RCM Experts" />
+  <meta property="og:description"
+    content="End‑to‑end medical billing and RCM: claims submission, denial management, AR follow‑up, and transparent reporting." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://meteoroidservices.com/" />
+  <meta property="og:site_name" content="Meteoroid Services" />
+  <meta property="og:image" content="%PUBLIC_URL%/header_logo.png" />
+
+  <!-- Meta Keywords -->
+  <meta name="keywords"
+    content="Meteoroid Services, medical billing, revenue cycle management, pharmacy billing, SNF billing, healthcare billing services, medical billing company USA, RCM experts" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Meteoroid Services | Medical Billing & RCM Experts" />
+  <meta name="twitter:description"
+    content="End‑to‑end medical billing and RCM: claims submission, denial management, AR follow‑up, and transparent reporting." />
+  <meta name="twitter:image" content="%PUBLIC_URL%/header_logo.png" />
+  <meta name="twitter:site" content="@meteoroidservices" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- React-Scroll Library -->
+  <script src="https://unpkg.com/react-scroll@1.8.4/dist/react-scroll.min.js"></script>
+
+  <title>Meteoroid Services | Medical Billing & RCM Experts</title>
+  <script>
+    // Custom Tailwind theme configuration
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'primary': '#31297C',      // Slightly richer purple
+            'primary-dark': '#1B0F42', // Deep but less harsh than before
+            'accent': '#B7A6D6',       // Softer lavender, a bit lighter
+            'light-gray': '#ECECEC',   // Brighter neutral gray
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          animation: {
+            'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+            'fade-in-right': 'fadeInRight 0.8s ease-out forwards',
+            'fade-in-left': 'fadeInLeft 0.8s ease-out forwards',
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            fadeInRight: {
+              '0%': { opacity: '0', transform: 'translateX(-20px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' },
+            },
+            leftInLeft: {
+              '0%': { opacity: '0', transform: 'translateX(20px)' },
+              '100%': { opacity: '1', transform: 'translateX(0)' },
+            },
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Structured Data: Organization -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Meteoroid Services",
+      "url": "https://meteoroidservices.com/",
+      "logo": "%PUBLIC_URL%/header_logo.png",
+      "description": "End‑to‑end medical billing and revenue cycle management (RCM) for healthcare providers across the United States.",
+      "sameAs": []
+    }
+    </script>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+</body>
+
+</html>
