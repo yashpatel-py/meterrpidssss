@@ -129,6 +129,7 @@ app.get('/api/posts/:slug', async (req, res, next) => {
     JOIN authors a ON a.id = p.author_id
     LEFT JOIN categories c ON c.id = p.category_id
     WHERE p.slug = $1
+      AND p.status = 'published'
     LIMIT 1;
   `;
 
