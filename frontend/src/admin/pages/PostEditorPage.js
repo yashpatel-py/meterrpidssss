@@ -17,6 +17,36 @@ const emptyForm = {
   publishedAt: '',
 };
 
+const EXCERPT_MAX = 160;
+const TITLE_MAX = 120;
+const SLUG_MAX = 90;
+
+const quillModules = {
+  toolbar: [
+    [{ header: [1, 2, 3, false] }],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{ list: 'ordered' }, { list: 'bullet' }],
+    [{ indent: '-1' }, { indent: '+1' }],
+    [{ align: [] }],
+    ['link'],
+    ['clean'],
+  ],
+};
+
+const quillFormats = [
+  'header',
+  'bold',
+  'italic',
+  'underline',
+  'strike',
+  'blockquote',
+  'list',
+  'bullet',
+  'indent',
+  'align',
+  'link',
+];
+
 function PostEditorPage() {
   const { token, user } = useAuth();
   const { id } = useParams();
@@ -36,12 +66,12 @@ function PostEditorPage() {
 
   const stripHtml = (value) => value.replace(/<[^>]+>/g, ' ');
 
-const slugify = (value) =>
-  value
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-    .slice(0, SLUG_MAX);
+  const slugify = (value) =>
+    value
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .slice(0, SLUG_MAX);
 
   const autoSlug = (titleValue, excerptValue, contentValue) => {
     const descriptionPart = excerptValue || stripHtml(contentValue || '');
@@ -111,10 +141,6 @@ const slugify = (value) =>
     loadMeta().catch((err) => console.error(err));
     loadPost();
   }, [baseUrl, id, isEditing, token, user]);
-
-const EXCERPT_MAX = 160;
-const TITLE_MAX = 120;
-const SLUG_MAX = 90;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -286,6 +312,8 @@ const SLUG_MAX = 90;
                   return next;
                 });
               }}
+              modules={quillModules}
+              formats={quillFormats}
               className="quill-dark"
             />
           </div>
