@@ -1,46 +1,75 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+
+const FALLBACK_IMAGE =
+  'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80';
+
+function getReadingMinutes(html) {
+  if (!html) return 2;
+  const text = html.replace(/<[^>]+>/g, ' ');
+  const wordCount = text
+    .split(/\s+/)
+    .map((word) => word.trim())
+    .filter(Boolean).length;
+  return Math.max(1, Math.round(wordCount / 200));
+}
 
 function BlogCard({ post }) {
-  const hero = post.hero_image || 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80';
-  const publishedDate = post.published_at ? new Date(post.published_at).toLocaleDateString() : 'Unpublished';
+  const hero = post.hero_image || FALLBACK_IMAGE;
+  const publishedDate = post.published_at
+    ? new Date(post.published_at).toLocaleDateString(undefined, {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      })
+    : 'Draft';
+
+  const readingMinutes = useMemo(() => getReadingMinutes(post.content), [post.content]);
 
   return (
-    <article className="group h-full rounded-3xl border border-slate-200 bg-white/70 shadow-lg transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl">
-      <div className="overflow-hidden rounded-t-3xl">
+    <Link
+      to={`/blog/${post.slug}`}
+      className="group relative flex h-full flex-col overflow-hidden rounded-[32px] border border-slate-200 bg-white text-slate-900 shadow-[0_30px_60px_rgba(49,41,124,0.1)] transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl"
+    >
+      <span className="absolute inset-0 bg-gradient-to-br from-accent/0 via-accent/10 to-primary/10 opacity-0 transition group-hover:opacity-100" />
+      <div className="relative h-60 overflow-hidden">
         <img
           src={hero}
           alt={post.title}
-          className="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
+          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
           loading="lazy"
         />
-      </div>
-      <div className="space-y-4 px-6 py-6">
-        <div className="flex flex-wrap items-center gap-2 text-sm text-primary">
+        <div className="absolute inset-x-6 bottom-6 flex items-center gap-2">
           {post.category?.name ? (
-            <span className="rounded-full bg-primary/10 px-3 py-1 text-primary">{post.category.name}</span>
-          ) : null}
-          <span className="text-slate-500">{publishedDate}</span>
-        </div>
-        <Link to={`/blog/${post.slug}`} className="block text-2xl font-semibold text-slate-900 hover:text-primary">
-          {post.title}
-        </Link>
-        {post.excerpt ? <p className="text-slate-600">{post.excerpt}</p> : null}
-        <div className="flex flex-wrap gap-2 text-xs uppercase tracking-wide text-slate-400">
-          {post.tags?.slice(0, 3).map((tag) => (
-            <span key={tag.id} className="rounded-full bg-slate-100 px-3 py-1 text-slate-500">
-              #{tag.slug}
+            <span className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary">
+              {post.category.name}
             </span>
-          ))}
+          ) : null}
+          <span className="rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-semibold text-slate-600 backdrop-blur">
+            {publishedDate}
+          </span>
         </div>
-        <Link
-          to={`/blog/${post.slug}`}
-          className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-dark"
-        >
-          Read more <span aria-hidden>→</span>
-        </Link>
       </div>
-    </article>
+
+      <div className="relative flex flex-1 flex-col gap-5 p-8">
+        <h3 className="text-2xl font-semibold leading-tight tracking-tight text-primary-dark">{post.title}</h3>
+        {post.excerpt ? <p className="text-sm leading-relaxed text-slate-600">{post.excerpt}</p> : null}
+        <div className="mt-auto flex flex-wrap items-center justify-between gap-4 text-xs uppercase tracking-[0.25em] text-slate-400">
+          <span>{readingMinutes} min read</span>
+          {post.tags?.length ? (
+            <span className="flex flex-wrap gap-2 text-[0.65rem] normal-case tracking-tight text-primary">
+              {post.tags.slice(0, 2).map((tag) => (
+                <span key={tag.id}>#{tag.slug}</span>
+              ))}
+            </span>
+          ) : null}
+        </div>
+        <div className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
+          Read the study <ArrowRight size={18} />
+        </div>
+      </div>
+    </Link>
   );
 }
 
