@@ -10,28 +10,28 @@ function BlogHero({ post }) {
   const categoryLabel = post?.category?.name || 'Time Study Playbook';
 
   return (
-    <section className="relative overflow-hidden rounded-[48px] border border-slate-800/20 bg-slate-950 px-6 py-16 text-white shadow-[0_40px_120px_rgba(15,23,42,0.35)] sm:px-12 lg:px-16">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(96,165,250,0.45),_transparent_55%),radial-gradient(circle_at_bottom_right,_rgba(56,189,248,0.35),_transparent_55%)]" />
-      <div className="absolute -right-32 top-1/2 hidden h-[520px] w-[520px] -translate-y-1/2 rounded-full bg-sky-400/20 blur-3xl lg:block" />
+    <section className="relative overflow-hidden rounded-[48px] border border-slate-200 bg-white px-6 py-16 text-slate-900 shadow-[0_45px_120px_rgba(15,23,42,0.08)] sm:px-12 lg:px-16">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.15),_transparent_55%),radial-gradient(circle_at_bottom_right,_rgba(59,130,246,0.12),_transparent_55%)]" />
+      <div className="absolute -right-32 top-1/2 hidden h-[520px] w-[520px] -translate-y-1/2 rounded-full bg-emerald-100/40 blur-3xl lg:block" />
       <div className="relative z-10 grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="space-y-8">
-          <nav className="flex items-center gap-2 text-sm text-slate-300/80">
-            <Link to="/" className="transition hover:text-white">
+          <nav className="flex items-center gap-2 text-sm text-slate-500">
+            <Link to="/" className="transition hover:text-emerald-600">
               Home
             </Link>
-            <span className="text-slate-500">/</span>
-            <span className="text-white">Insights</span>
+            <span className="text-slate-300">/</span>
+            <span className="font-medium text-slate-600">Insights</span>
           </nav>
 
-          <div className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-medium tracking-[0.25em] uppercase text-white/80">
+          <div className="inline-flex items-center gap-3 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-medium uppercase tracking-[0.25em] text-emerald-600">
             {categoryLabel}
           </div>
 
           <div className="space-y-6">
-            <h1 className="text-4xl font-semibold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
               {post?.title || 'Precision time-study insights for high-trust billing teams'}
             </h1>
-            <p className="max-w-xl text-lg leading-relaxed text-slate-200">
+            <p className="max-w-xl text-lg leading-relaxed text-slate-600">
               {post?.excerpt ||
                 'Learn how Meteorroids measures, optimises, and operationalises every clinical minute so your revenue cycle stays predictable and your teams stay energised.'}
             </p>
@@ -41,7 +41,7 @@ function BlogHero({ post }) {
             {post ? (
               <Link
                 to={`/blog/${post.slug}`}
-                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-base font-semibold text-slate-900 shadow-lg transition hover:bg-emerald-200"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-base font-semibold text-white shadow-lg transition hover:bg-primary-dark"
               >
                 Dive into feature
                 <ArrowRight size={18} />
@@ -49,7 +49,7 @@ function BlogHero({ post }) {
             ) : null}
             <Link
               to="/#contact"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-base font-semibold text-white/80 transition hover:border-white hover:text-white"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-6 py-3 text-base font-semibold text-slate-700 transition hover:border-emerald-300 hover:text-emerald-600"
             >
               Speak with us
             </Link>
@@ -57,8 +57,8 @@ function BlogHero({ post }) {
         </div>
 
         <div className="relative mx-auto w-full max-w-md lg:max-w-lg">
-          <div className="absolute -inset-6 rounded-[42px] bg-gradient-to-br from-emerald-400/40 via-sky-400/20 to-indigo-500/30 blur-2xl" />
-          <div className="relative overflow-hidden rounded-[36px] border border-white/20 bg-white/10 shadow-[0_30px_120px_rgba(14,165,233,0.25)]">
+          <div className="absolute -inset-6 rounded-[42px] bg-gradient-to-br from-emerald-200/60 via-sky-200/40 to-indigo-200/40 blur-2xl" />
+          <div className="relative overflow-hidden rounded-[36px] border border-slate-100 bg-slate-50 shadow-[0_30px_120px_rgba(14,165,233,0.15)]">
             <img src={heroImage} alt={post?.title || 'Featured insight'} className="aspect-[4/5] w-full object-cover" loading="lazy" />
           </div>
         </div>
@@ -73,11 +73,11 @@ function BlogHero({ post }) {
         ].map((stat) => (
           <div
             key={stat.label}
-            className="rounded-2xl border border-white/15 bg-white/5 p-5 backdrop-blur-sm transition hover:border-white/30"
+            className="rounded-2xl border border-slate-200 bg-slate-50 p-5 transition hover:border-emerald-200 hover:bg-white"
           >
-            <p className="text-xs uppercase tracking-[0.35em] text-white/60">{stat.label}</p>
-            <p className="mt-2 text-2xl font-semibold text-white">{stat.value}</p>
-            <p className="mt-1 text-sm text-white/70">{stat.caption}</p>
+            <p className="text-xs uppercase tracking-[0.35em] text-slate-500">{stat.label}</p>
+            <p className="mt-2 text-2xl font-semibold text-slate-900">{stat.value}</p>
+            <p className="mt-1 text-sm text-slate-600">{stat.caption}</p>
           </div>
         ))}
       </div>
