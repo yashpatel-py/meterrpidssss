@@ -34,14 +34,14 @@ function ShareButtons({ title }) {
 
   return (
     <div className="flex flex-wrap items-center gap-3">
-      <span className="text-sm font-semibold text-slate-600">Share:</span>
+      <span className="text-sm font-semibold text-primary">Share:</span>
       {shareConfigs.map(({ icon: Icon, label, buildUrl }) => (
         <a
           key={label}
           href={buildUrl(currentUrl, title)}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-primary hover:text-primary"
+          className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-2 text-xs font-semibold text-primary transition hover:bg-primary hover:text-white hover:border-primary"
         >
           <Icon size={16} />
           {label}
@@ -50,7 +50,7 @@ function ShareButtons({ title }) {
       <button
         type="button"
         onClick={copyLink}
-        className="inline-flex items-center gap-2 rounded-full border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600 transition hover:border-primary hover:text-primary"
+        className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-3 py-2 text-xs font-semibold text-primary transition hover:bg-primary hover:text-white hover:border-primary"
       >
         <LinkIcon size={16} /> Copy link
       </button>

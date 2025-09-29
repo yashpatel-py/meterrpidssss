@@ -30,9 +30,9 @@ function BlogCard({ post }) {
   return (
     <Link
       to={`/blog/${post.slug}`}
-      className="group relative flex h-full flex-col overflow-hidden rounded-[32px] border border-slate-200 bg-white text-slate-900 shadow-[0_30px_90px_rgba(15,23,42,0.08)] transition hover:-translate-y-1 hover:border-emerald-300/60 hover:shadow-[0_35px_100px_rgba(15,23,42,0.12)]"
+      className="group relative flex h-full flex-col overflow-hidden rounded-[32px] border border-slate-200 bg-white text-slate-900 shadow-[0_30px_90px_rgba(15,23,42,0.08)] transition hover:-translate-y-1 hover:border-primary hover:shadow-[0_35px_100px_rgba(49,41,124,0.18)]"
     >
-      <span className="absolute inset-0 bg-gradient-to-br from-emerald-100/0 via-emerald-50 to-sky-100/0 opacity-0 transition group-hover:opacity-100" />
+      <span className="absolute inset-0 bg-gradient-to-br from-primary/0 via-accent/20 to-primary/5 opacity-0 transition group-hover:opacity-100" />
       <div className="relative h-60 overflow-hidden">
         <img
           src={hero}
@@ -42,7 +42,7 @@ function BlogCard({ post }) {
         />
         <div className="absolute inset-x-6 bottom-6 flex items-center gap-2">
           {post.category?.name ? (
-            <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-600">
+            <span className="rounded-full border border-accent/70 bg-accent/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-primary">
               {post.category.name}
             </span>
           ) : null}
@@ -58,14 +58,14 @@ function BlogCard({ post }) {
         <div className="mt-auto flex flex-wrap items-center justify-between gap-4 text-xs uppercase tracking-[0.25em] text-slate-400">
           <span>{readingMinutes} min read</span>
           {post.tags?.length ? (
-            <span className="flex flex-wrap gap-2 text-[0.65rem] normal-case tracking-tight text-emerald-500">
+            <span className="flex flex-wrap gap-2 text-[0.65rem] normal-case tracking-tight text-primary">
               {post.tags.slice(0, 2).map((tag) => (
                 <span key={tag.id}>#{tag.slug}</span>
               ))}
             </span>
           ) : null}
         </div>
-        <div className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600">
+        <div className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
           Read the study <ArrowRight size={18} />
         </div>
       </div>

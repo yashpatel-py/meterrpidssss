@@ -12,7 +12,6 @@ const AnimatedCounter = ({ end, duration = 2000, suffix = '', prefix = '' }) => 
             let start = 0;
             const numericMatch = end.toString().match(/^(\d+)(.*)$/);
             const endValue = numericMatch ? parseInt(numericMatch[1]) : parseInt(end);
-            const endSuffix = numericMatch ? numericMatch[2] : '';
             
             if (start === endValue) return;
             let startTime = null;

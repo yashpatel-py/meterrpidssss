@@ -86,56 +86,67 @@ function BlogDetailPage() {
       <main className="pb-32">
         <div className="container mx-auto px-6 pt-28 sm:pt-32">
           <section className="relative overflow-hidden rounded-[48px] border border-slate-200 bg-white px-6 py-16 text-slate-900 shadow-[0_45px_120px_rgba(15,23,42,0.08)] sm:px-12 lg:px-16">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.15),_transparent_55%),radial-gradient(circle_at_bottom_right,_rgba(59,130,246,0.12),_transparent_55%)]" />
-            <div className="absolute -left-32 top-1/2 hidden h-[520px] w-[520px] -translate-y-1/2 rounded-full bg-emerald-100/40 blur-3xl lg:block" />
-            <div className="relative z-10 grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-              <div className="space-y-6">
-                <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-600">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(49,41,124,0.18),_transparent_55%),radial-gradient(circle_at_bottom_right,_rgba(183,166,214,0.22),_transparent_55%)]" />
+            <div className="absolute -top-36 right-0 hidden h-[420px] w-[420px] rounded-full bg-primary/15 blur-3xl lg:block" />
+            <div className="relative z-10 mx-auto flex max-w-5xl flex-col gap-8">
+              <div className="flex flex-wrap items-center justify-between gap-3 text-sm font-semibold text-primary">
+                <Link to="/blog" className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2">
                   ← Back to insights
                 </Link>
-                <div className="inline-flex items-center gap-3 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-emerald-600">
-                  {post.category?.name || 'Time Study' }
-                </div>
-                <h1 className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">{post.title}</h1>
-                {post.excerpt ? <p className="max-w-2xl text-lg leading-relaxed text-slate-600">{post.excerpt}</p> : null}
-                <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500">
-                  <span className="inline-flex items-center gap-2">
-                    <User size={16} className="text-emerald-600" />
-                    {post.author?.name || 'Meteorroids Crew'}
-                  </span>
-                  <span className="inline-flex items-center gap-2">
-                    <CalendarDays size={16} className="text-emerald-600" />
-                    {publishedAt}
-                  </span>
-                  <span className="inline-flex items-center gap-2">
-                    <Clock size={16} className="text-emerald-600" />
-                    {readingMinutes} min read
-                  </span>
-                </div>
+                <span className="inline-flex items-center gap-3 rounded-full border border-accent/70 bg-accent/20 px-4 py-2 text-xs uppercase tracking-[0.35em]">
+                  {post.category?.name || 'Time Study'}
+                </span>
               </div>
 
-              <div className="relative mx-auto w-full max-w-md lg:max-w-lg">
-                <div className="absolute -inset-6 rounded-[42px] bg-gradient-to-br from-emerald-200/60 via-sky-200/40 to-indigo-200/40 blur-2xl" />
-                <div className="relative overflow-hidden rounded-[36px] border border-slate-100 bg-slate-50 shadow-[0_30px_120px_rgba(14,165,233,0.15)]">
-                  <img src={heroImage} alt={post.title} className="aspect-[4/5] w-full object-cover" loading="lazy" />
-                </div>
+              <div className="space-y-6 text-left">
+                <h1 className="text-4xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+                  {post.title}
+                </h1>
+                {post.excerpt ? (
+                  <p className="max-w-3xl text-lg leading-relaxed text-slate-600">{post.excerpt}</p>
+                ) : null}
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3 text-sm font-medium text-primary">
+                <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2">
+                  <User size={16} />
+                  {post.author?.name || 'Meteorroids Crew'}
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2">
+                  <CalendarDays size={16} />
+                  {publishedAt}
+                </span>
+                <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2">
+                  <Clock size={16} />
+                  {readingMinutes} min read
+                </span>
+              </div>
+
+              <div className="relative overflow-hidden rounded-[36px] border border-slate-100 bg-slate-50 shadow-[0_30px_120px_rgba(49,41,124,0.18)]">
+                <div className="absolute inset-0 bg-gradient-to-tr from-white via-transparent to-white/40" />
+                <img
+                  src={heroImage}
+                  alt={post.title}
+                  className="relative z-10 max-h-[560px] w-full rounded-[36px] object-contain"
+                  loading="lazy"
+                />
               </div>
             </div>
           </section>
 
           <section className="relative -mt-24 lg:-mt-32">
-            <div className="mx-auto max-w-5xl rounded-[40px] border border-slate-200 bg-white p-8 text-slate-900 shadow-[0_40px_140px_rgba(15,23,42,0.08)] sm:p-10 lg:p-14">
-              <div className="grid gap-6 sm:grid-cols-3">
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">Published</p>
+            <div className="mx-auto max-w-5xl rounded-[40px] border border-primary/10 bg-white p-8 text-slate-900 shadow-[0_40px_140px_rgba(49,41,124,0.12)] sm:p-10 lg:p-14">
+              <div className="mt-12 grid gap-6 sm:grid-cols-3">
+                <div className="rounded-3xl border border-primary/20 bg-primary/5 p-6 text-primary">
+                  <p className="text-xs font-semibold uppercase tracking-[0.35em]">Published</p>
                   <p className="mt-3 text-lg font-semibold text-slate-900">{publishedAt}</p>
                 </div>
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">Author</p>
+                <div className="rounded-3xl border border-primary/20 bg-primary/5 p-6 text-primary">
+                  <p className="text-xs font-semibold uppercase tracking-[0.35em]">Author</p>
                   <p className="mt-3 text-lg font-semibold text-slate-900">{post.author?.name || 'Meteorroids Crew'}</p>
                 </div>
-                <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">Cadence</p>
+                <div className="rounded-3xl border border-primary/20 bg-primary/5 p-6 text-primary">
+                  <p className="text-xs font-semibold uppercase tracking-[0.35em]">Cadence</p>
                   <p className="mt-3 text-lg font-semibold text-slate-900">{readingMinutes} minute read</p>
                 </div>
               </div>
@@ -148,18 +159,33 @@ function BlogDetailPage() {
                 <div className="flex flex-wrap items-center justify-between gap-6">
                   {post.tags?.length ? (
                     <div className="flex flex-wrap items-center gap-3">
-                      <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-600">
+                      <span className="inline-flex items-center gap-2 rounded-full bg-accent/30 px-3 py-1 text-sm font-semibold text-primary">
                         <TagIcon size={16} /> Tags
                       </span>
                       <div className="flex flex-wrap gap-2 text-sm text-slate-500">
                         {post.tags.map((tag) => (
-                          <span key={tag.id} className="rounded-full border border-slate-200 px-3 py-1">#{tag.slug}</span>
+                          <span key={tag.id} className="rounded-full border border-primary/15 px-3 py-1 text-primary">#{tag.slug}</span>
                         ))}
                       </div>
                     </div>
                   ) : null}
                   <ShareButtons title={post.title} />
                 </div>
+              </div>
+
+              <div className="mt-14 flex flex-col gap-4 rounded-[28px] border border-primary/15 bg-primary/5 p-8 text-center sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary">Keep exploring</p>
+                  <h3 className="mt-2 text-2xl font-semibold text-slate-900">
+                    Browse more Meteorroids case notes and playbooks
+                  </h3>
+                </div>
+                <Link
+                  to="/blog"
+                  className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-primary/30 transition hover:-translate-y-0.5 hover:bg-primary-dark"
+                >
+                  Back to all insights
+                </Link>
               </div>
             </div>
           </section>

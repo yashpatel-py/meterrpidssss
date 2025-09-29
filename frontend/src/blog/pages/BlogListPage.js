@@ -1,31 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Activity, FileText, Layers } from 'lucide-react';
 import BlogCard from '../components/BlogCard';
 import { API_BASE_URL } from '../utils/config';
 import TopBar from '../../components/TopBar';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-
-const pillars = [
-  {
-    title: 'Time-motion clarity',
-    description:
-      'Shadowing teams across intake, coding, and AR to surface the true micro-frictions that slow reimbursements.',
-    icon: Activity,
-  },
-  {
-    title: 'Operational choreography',
-    description:
-      'Turning observations into precise runbooks, cross-team rituals, and measurement cadences your staff can trust.',
-    icon: Layers,
-  },
-  {
-    title: 'Financial storytelling',
-    description:
-      'Linking every workflow decision back to revenue yield, patient satisfaction, and staff wellbeing metrics.',
-    icon: FileText,
-  },
-];
 
 function BlogListPage() {
   const [posts, setPosts] = useState([]);
@@ -60,7 +38,7 @@ function BlogListPage() {
       <main className="pb-20">
         <div className="container mx-auto px-6 pt-28 sm:pt-32">
           <section className="rounded-[32px] border border-slate-200 bg-white px-6 py-14 text-center shadow-sm sm:px-10">
-            <span className="inline-flex items-center justify-center rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-emerald-600">
+            <span className="inline-flex items-center justify-center rounded-full border border-accent/70 bg-accent/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.35em] text-primary">
               Time study playbook
             </span>
             <div className="mt-6 space-y-4">
@@ -76,7 +54,7 @@ function BlogListPage() {
           <section className="mt-20">
             <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
               <div>
-                <p className="text-xs uppercase tracking-[0.35em] text-emerald-500">Latest dispatches</p>
+                <p className="text-xs uppercase tracking-[0.35em] text-primary">Latest dispatches</p>
                 <h2 className="mt-2 text-3xl font-semibold text-slate-900">Playbooks to recalibrate your revenue cycle</h2>
               </div>
             </div>

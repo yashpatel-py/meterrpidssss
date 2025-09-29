@@ -1,9 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { fetchJSON } from '../utils/api';
+import RichTextEditor from '../components/RichTextEditor';
 
 const emptyForm = {
   title: '',
@@ -20,32 +19,6 @@ const emptyForm = {
 const EXCERPT_MAX = 160;
 const TITLE_MAX = 120;
 const SLUG_MAX = 90;
-
-const quillModules = {
-  toolbar: [
-    [{ header: [1, 2, 3, false] }],
-    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-    [{ list: 'ordered' }, { list: 'bullet' }],
-    [{ indent: '-1' }, { indent: '+1' }],
-    [{ align: [] }],
-    ['link'],
-    ['clean'],
-  ],
-};
-
-const quillFormats = [
-  'header',
-  'bold',
-  'italic',
-  'underline',
-  'strike',
-  'blockquote',
-  'list',
-  'bullet',
-  'indent',
-  'align',
-  'link',
-];
 
 function PostEditorPage() {
   const { token, user } = useAuth();
@@ -300,21 +273,18 @@ function PostEditorPage() {
             Blog description
           </label>
           <div className="mt-2 overflow-hidden rounded-2xl border border-slate-700 bg-slate-900/60 text-slate-100">
-            <ReactQuill
-              theme="snow"
+            <RichTextEditor
               value={form.content}
-              onChange={(value) => {
+              onChange={(html) => {
                 setForm((prev) => {
-                  const next = { ...prev, content: value };
+                  const next = { ...prev, content: html };
                   if (!slugLocked) {
-                    next.slug = autoSlug(next.title, next.excerpt, value);
+                    next.slug = autoSlug(next.title, next.excerpt, html);
                   }
                   return next;
                 });
               }}
-              modules={quillModules}
-              formats={quillFormats}
-              className="quill-dark"
+              placeholder="Tell the full story..."
             />
           </div>
         </div>
