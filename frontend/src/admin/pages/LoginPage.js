@@ -34,18 +34,18 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center px-6">
-      <div className="w-full max-w-md rounded-3xl border border-slate-800 bg-slate-900/60 p-8 shadow-2xl shadow-fuchsia-500/10 backdrop-blur">
+    <div className="min-h-screen bg-gradient-to-br from-white via-slate-50 to-slate-100 flex items-center justify-center px-6 py-12">
+      <div className="w-full max-w-md rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/70 backdrop-blur-sm">
         <div className="mb-6 text-center">
-          <div className="mx-auto mb-4 inline-grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-fuchsia-500 to-cyan-400 text-slate-950 font-black text-xl">
+          <div className="mx-auto mb-4 inline-grid h-14 w-14 place-items-center rounded-2xl bg-primary text-white font-black text-xl">
             M
           </div>
-          <h1 className="text-2xl font-semibold text-white">Meteorroids Admin</h1>
-          <p className="text-sm text-slate-400 mt-1">Secure access to mission control</p>
+          <h1 className="text-2xl font-semibold text-slate-900">Meteorroids Admin</h1>
+          <p className="text-sm text-slate-500 mt-1">Secure access to mission control</p>
         </div>
 
         {error ? (
-          <div className="mb-4 flex items-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-200">
+          <div className="mb-4 flex items-center gap-2 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
             <ShieldAlert className="h-4 w-4" />
             <span>{error}</span>
           </div>
@@ -53,7 +53,7 @@ function LoginPage() {
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-slate-300">
+            <label htmlFor="email" className="block text-sm font-medium text-slate-700">
               Email address
             </label>
             <input
@@ -63,12 +63,12 @@ function LoginPage() {
               required
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              className="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900/60 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-cyan-400 focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none"
               placeholder="admin@meteorroids.com"
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-slate-300">
+            <label htmlFor="password" className="block text-sm font-medium text-slate-700">
               Password
             </label>
             <input
@@ -78,14 +78,14 @@ function LoginPage() {
               required
               value={password}
               onChange={(event) => setPassword(event.target.value)}
-              className="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900/60 px-4 py-3 text-slate-100 placeholder:text-slate-500 focus:border-fuchsia-400 focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-primary focus:outline-none"
               placeholder="••••••••"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-xl bg-gradient-to-r from-fuchsia-500 via-cyan-400 to-emerald-400 px-6 py-3 font-semibold text-slate-950 transition-transform duration-150 hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-60"
+            className="group relative inline-flex w-full items-center justify-center overflow-hidden rounded-xl bg-primary px-6 py-3 font-semibold text-white transition-colors duration-150 hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60"
           >
             {loading ? (
               <>

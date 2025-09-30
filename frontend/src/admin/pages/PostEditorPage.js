@@ -201,24 +201,24 @@ function PostEditorPage() {
   };
 
   if (loading) {
-    return <div className="text-slate-400">Preparing editor…</div>;
+    return <div className="text-slate-500">Preparing editor…</div>;
   }
 
   if (error) {
-    return <div className="text-red-300">{error}</div>;
+    return <div className="text-red-600">{error}</div>;
   }
 
   return (
     <div className="space-y-8">
       <header>
-        <p className="text-xs uppercase tracking-[0.4em] text-slate-500">{isEditing ? 'Update' : 'Compose'}</p>
-        <h1 className="mt-1 text-3xl font-semibold text-white">{isEditing ? 'Edit mission log' : 'New mission log'}</h1>
+        <p className="text-xs uppercase tracking-[0.4em] text-primary/70">{isEditing ? 'Update' : 'Compose'}</p>
+        <h1 className="mt-1 text-3xl font-semibold text-slate-900">{isEditing ? 'Edit mission log' : 'New mission log'}</h1>
       </header>
 
       <form className="grid gap-6" onSubmit={handleSubmit}>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
-            <label className="text-sm font-medium text-slate-300" htmlFor="title">
+            <label className="text-sm font-medium text-slate-700" htmlFor="title">
               Title
             </label>
             <input
@@ -227,14 +227,14 @@ function PostEditorPage() {
               required
               value={form.title}
               onChange={handleChange}
-              className="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900/60 px-4 py-3 text-slate-100 focus:border-cyan-400 focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 focus:border-primary focus:outline-none"
             />
             <p className="mt-1 text-xs text-slate-500 text-right">
               {form.title.length}/{TITLE_MAX}
             </p>
           </div>
           <div>
-            <label className="text-sm font-medium text-slate-300" htmlFor="slug">
+            <label className="text-sm font-medium text-slate-700" htmlFor="slug">
               Slug
             </label>
             <input
@@ -243,7 +243,7 @@ function PostEditorPage() {
               required
               value={form.slug}
               onChange={handleChange}
-              className="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900/60 px-4 py-3 text-slate-100 focus:border-fuchsia-400 focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 focus:border-primary focus:outline-none"
             />
             <p className="mt-1 text-xs text-slate-500 text-right">
               {form.slug.length}/{SLUG_MAX}
@@ -252,7 +252,7 @@ function PostEditorPage() {
         </div>
 
         <div>
-          <label className="text-sm font-medium text-slate-300" htmlFor="excerpt">
+          <label className="text-sm font-medium text-slate-700" htmlFor="excerpt">
             Excerpt
           </label>
           <textarea
@@ -261,7 +261,7 @@ function PostEditorPage() {
             rows={3}
             value={form.excerpt}
             onChange={handleChange}
-            className="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900/60 px-4 py-3 text-slate-100 focus:border-emerald-400 focus:outline-none"
+            className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 focus:border-primary focus:outline-none"
           />
           <p className="mt-1 text-xs text-slate-500 text-right">
             {form.excerpt.length}/{EXCERPT_MAX}
@@ -269,10 +269,10 @@ function PostEditorPage() {
         </div>
 
         <div>
-          <label className="text-sm font-medium text-slate-300" htmlFor="content">
+          <label className="text-sm font-medium text-slate-700" htmlFor="content">
             Blog description
           </label>
-          <div className="mt-2 overflow-hidden rounded-2xl border border-slate-700 bg-slate-900/60 text-slate-100">
+          <div className="mt-2 overflow-hidden rounded-2xl border border-slate-200 bg-white">
             <RichTextEditor
               value={form.content}
               onChange={(html) => {
@@ -290,14 +290,14 @@ function PostEditorPage() {
         </div>
 
         <input type="hidden" name="authorId" value={form.authorId} readOnly />
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/60 px-4 py-3 text-sm text-slate-300">
-          <span className="font-semibold text-slate-100">Author:</span>{' '}
+        <div className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-600">
+          <span className="font-semibold text-slate-900">Author:</span>{' '}
           {authors.find((author) => author.id === Number(form.authorId))?.name || 'Unassigned'}
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
           <div>
-            <label className="text-sm font-medium text-slate-300" htmlFor="status">
+            <label className="text-sm font-medium text-slate-700" htmlFor="status">
               Status
             </label>
             <select
@@ -305,7 +305,7 @@ function PostEditorPage() {
               name="status"
               value={form.status}
               onChange={handleChange}
-              className="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900/60 px-4 py-3 text-slate-100 focus:border-fuchsia-400 focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 focus:border-primary focus:outline-none"
             >
               <option value="draft">Draft</option>
               <option value="scheduled">Scheduled</option>
@@ -313,7 +313,7 @@ function PostEditorPage() {
             </select>
           </div>
           <div>
-            <label className="text-sm font-medium text-slate-300" htmlFor="publishedAt">
+            <label className="text-sm font-medium text-slate-700" htmlFor="publishedAt">
               Publish date
             </label>
             <input
@@ -322,20 +322,20 @@ function PostEditorPage() {
               name="publishedAt"
               value={form.publishedAt}
               onChange={handleChange}
-              className="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900/60 px-4 py-3 text-slate-100 focus:border-cyan-400 focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 focus:border-primary focus:outline-none"
             />
           </div>
         </div>
 
         <div className="grid gap-3">
-          <p className="text-sm font-medium text-slate-300">Hero image</p>
+          <p className="text-sm font-medium text-slate-700">Hero image</p>
           <div className="flex flex-wrap gap-3 text-sm">
             <button
               type="button"
               className={`rounded-full border px-4 py-2 transition ${
                 imageMode === 'url'
-                  ? 'border-cyan-400 bg-cyan-500/20 text-cyan-200'
-                  : 'border-slate-700 bg-slate-900/60 text-slate-300 hover:border-cyan-400 hover:text-cyan-200'
+                  ? 'border-primary bg-primary/10 text-primary'
+                  : 'border-slate-200 bg-white text-slate-600 hover:border-primary hover:text-primary'
               }`}
               onClick={() => handleImageModeChange('url')}
             >
@@ -345,8 +345,8 @@ function PostEditorPage() {
               type="button"
               className={`rounded-full border px-4 py-2 transition ${
                 imageMode === 'upload'
-                  ? 'border-fuchsia-400 bg-fuchsia-500/20 text-fuchsia-200'
-                  : 'border-slate-700 bg-slate-900/60 text-slate-300 hover:border-fuchsia-400 hover:text-fuchsia-200'
+                  ? 'border-primary bg-primary/10 text-primary'
+                  : 'border-slate-200 bg-white text-slate-600 hover:border-primary hover:text-primary'
               }`}
               onClick={() => handleImageModeChange('upload')}
             >
@@ -359,22 +359,22 @@ function PostEditorPage() {
               name="heroImage"
               value={form.heroImage}
               onChange={handleChange}
-              className="mt-1 w-full rounded-xl border border-slate-700 bg-slate-900/60 px-4 py-3 text-slate-100 focus:border-cyan-400 focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-slate-900 focus:border-primary focus:outline-none"
               placeholder="https://..."
             />
           ) : (
-            <div className="rounded-2xl border border-dashed border-slate-700 bg-slate-900/60 p-6 text-center">
+            <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-6 text-center">
               <input type="file" accept="image/*" onChange={handleFileUpload} className="hidden" id="heroFile" />
               <label
                 htmlFor="heroFile"
-                className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-cyan-500/40 px-4 py-2 text-sm text-cyan-200"
+                className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-primary/40 px-4 py-2 text-sm text-primary"
               >
                 Choose image
               </label>
               {uploadedImage ? (
                 <div className="mt-4 space-y-2">
-                  <p className="text-sm text-slate-300">{uploadedImage.name}</p>
-                  <img src={uploadedImage.preview} alt="Preview" className="mx-auto max-h-40 rounded-xl border border-slate-700 object-cover" />
+                  <p className="text-sm text-slate-600">{uploadedImage.name}</p>
+                  <img src={uploadedImage.preview} alt="Preview" className="mx-auto max-h-40 rounded-xl border border-slate-300 object-cover" />
                 </div>
               ) : null}
             </div>
@@ -384,7 +384,7 @@ function PostEditorPage() {
 
 
         <div>
-          <p className="text-sm font-medium text-slate-300">Tags</p>
+          <p className="text-sm font-medium text-slate-700">Tags</p>
           <div className="mt-2 flex flex-wrap gap-2">
             {tags.map((tag) => {
               const selected = form.tagIds.includes(tag.id);
@@ -395,8 +395,8 @@ function PostEditorPage() {
                   onClick={() => handleTagToggle(tag.id)}
                   className={`rounded-full border px-4 py-2 text-sm transition ${
                     selected
-                      ? 'border-cyan-400 bg-cyan-500/20 text-cyan-200'
-                      : 'border-slate-700 bg-slate-900/60 text-slate-300 hover:border-cyan-400 hover:text-cyan-200'
+                      ? 'border-primary bg-primary/10 text-primary'
+                      : 'border-slate-200 bg-white text-slate-600 hover:border-primary hover:text-primary'
                   }`}
                 >
                   #{tag.name}
@@ -409,7 +409,7 @@ function PostEditorPage() {
         <button
           type="submit"
           disabled={saving}
-          className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-cyan-400 to-emerald-400 px-6 py-3 font-semibold text-slate-950 shadow-lg shadow-emerald-400/20 disabled:cursor-not-allowed disabled:opacity-60"
+          className="inline-flex items-center justify-center rounded-2xl bg-primary px-6 py-3 font-semibold text-white shadow-sm shadow-primary/30 transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60"
         >
           {saving ? 'Saving…' : isEditing ? 'Update post' : 'Publish post'}
         </button>

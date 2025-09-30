@@ -5,12 +5,12 @@ import { fetchJSON } from '../utils/api';
 
 function StatCard({ icon: Icon, label, value, accentClass }) {
   return (
-    <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg shadow-slate-950/40">
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-200/70">
       <div className={`inline-flex items-center justify-center rounded-xl p-3 ${accentClass}`}>
         <Icon className="h-5 w-5" />
       </div>
-      <p className="mt-3 text-sm uppercase tracking-wide text-slate-400">{label}</p>
-      <p className="mt-1 text-2xl font-semibold text-white">{value}</p>
+      <p className="mt-3 text-sm uppercase tracking-wide text-slate-500">{label}</p>
+      <p className="mt-1 text-2xl font-semibold text-slate-900">{value}</p>
     </div>
   );
 }
@@ -43,8 +43,8 @@ function DashboardPage() {
   return (
     <div className="space-y-10">
       <header>
-        <p className="text-sm uppercase tracking-[0.4em] text-slate-500">Mission brief</p>
-        <h1 className="mt-1 text-3xl font-semibold text-white">Control Center Overview</h1>
+        <p className="text-sm uppercase tracking-[0.4em] text-primary/70">Mission brief</p>
+        <h1 className="mt-1 text-3xl font-semibold text-slate-900">Control Center Overview</h1>
       </header>
 
       <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -52,46 +52,46 @@ function DashboardPage() {
           icon={FileText}
           label="Published posts"
           value={stats.posts}
-          accentClass="bg-fuchsia-500/20 text-fuchsia-300"
+          accentClass="bg-primary"
         />
         <StatCard
           icon={Layers}
           label="Categories tracked"
           value={stats.categories}
-          accentClass="bg-cyan-500/20 text-cyan-300"
+          accentClass="bg-accent"
         />
         <StatCard
           icon={Tag}
           label="Active tags"
           value={stats.tags}
-          accentClass="bg-emerald-500/20 text-emerald-300"
+          accentClass="bg-emerald-500"
         />
       </section>
 
-      <section className="rounded-3xl border border-slate-800 bg-slate-900/60 p-6 shadow-lg shadow-slate-950/40">
-        <div className="flex items-center gap-3 border-b border-slate-800 pb-4 mb-4">
+      <section className="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-sm shadow-slate-200/70">
+        <div className="flex items-center gap-3 border-b border-slate-200 pb-4 mb-4">
           <Activity className="h-5 w-5 text-cyan-400" />
-          <h2 className="text-xl font-semibold text-white">Recent posts</h2>
+          <h2 className="text-xl font-semibold text-slate-900">Recent posts</h2>
         </div>
         <div className="space-y-3">
           {recentPosts.length === 0 ? (
-            <p className="text-slate-400">No posts yet. Ready for liftoff?</p>
+            <p className="text-slate-500">No posts yet. Ready for liftoff?</p>
           ) : (
             recentPosts.map((post) => (
               <article
                 key={post.id}
-                className="rounded-2xl border border-slate-800 bg-slate-900/50 px-5 py-4 transition hover:border-cyan-500/40"
+                className="rounded-2xl border border-slate-200 bg-white px-5 py-4 transition hover:border-primary/30 hover:shadow-sm"
               >
                 <div className="flex items-center justify-between gap-4">
                   <div>
-                    <h3 className="text-lg font-semibold text-white">{post.title}</h3>
-                    <p className="text-sm text-slate-400">Slug: {post.slug}</p>
+                    <h3 className="text-lg font-semibold text-slate-900">{post.title}</h3>
+                    <p className="text-sm text-slate-500">Slug: {post.slug}</p>
                   </div>
                   <span
                     className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide ${
                       post.status === 'published'
-                        ? 'bg-emerald-500/20 text-emerald-300'
-                        : 'bg-amber-500/10 text-amber-300'
+                        ? 'bg-emerald-50 text-emerald-600'
+                        : 'bg-amber-50 text-amber-600'
                     }`}
                   >
                     {post.status}
