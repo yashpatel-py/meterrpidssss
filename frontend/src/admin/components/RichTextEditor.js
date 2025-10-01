@@ -28,6 +28,7 @@ import {
   REDO_COMMAND,
   SELECTION_CHANGE_COMMAND,
   UNDO_COMMAND,
+  $isRootOrShadowRoot,
 } from 'lexical';
 import { $setBlocksType, $getSelectionStyleValueForProperty, $patchStyleText } from '@lexical/selection';
 import {
@@ -259,7 +260,25 @@ function ToolbarPlugin({
     });
 
     const anchorNode = selection.anchor.getNode();
-    const topLevelElement = anchorNode.getTopLevelElementOrThrow();
+    let topLevelElement;
+    try {
+      topLevelElement = anchorNode.getTopLevelElementOrThrow();
+    } catch (_error) {
+      if ($isRootOrShadowRoot(anchorNode)) {
+        setBlockType('paragraph');
+        setElementFormat('left');
+        setIsLink(false);
+        return;
+      }
+      topLevelElement = anchorNode;
+    }
+
+    if ($isRootOrShadowRoot(topLevelElement)) {
+      setBlockType('paragraph');
+      setElementFormat('left');
+      setIsLink(false);
+      return;
+    };
 
     if ($isListNode(topLevelElement)) {
       const parent = topLevelElement.getParent();
@@ -693,33 +712,6 @@ function ToolbarPlugin({
     </div>
   );
 }
-
-function InitialHtmlPlugin({ initialHtml, lastHtmlRef }) {
-  const [editor] = useLexicalComposerContext();
-
-  useEffect(() => {
-    if (initialHtml === undefined || initialHtml === null) {
-      return;
-    }
-    if (lastHtmlRef.current === initialHtml) {
-      return;
-    }
-
-    editor.update(() => {
-      const parser = new DOMParser();
-      const dom = parser.parseFromString(initialHtml || '<p></p>', 'text/html');
-      const nodes = $generateNodesFromDOM(editor, dom);
-      const root = $getRoot();
-      root.clear();
-      root.append(...nodes);
-    });
-
-    lastHtmlRef.current = initialHtml;
-  }, [editor, initialHtml, lastHtmlRef]);
-
-  return null;
-}
-
 function EditorControllerPlugin({ onReady }) {
   const [editor] = useLexicalComposerContext();
   useEffect(() => {
@@ -729,13 +721,14 @@ function EditorControllerPlugin({ onReady }) {
 }
 
 function RichTextEditor({ value, onChange, placeholder = 'Write your article…' }) {
-  const lastHtmlRef = useRef(value ?? '');
+  const lastHtmlRef = useRef('');
   const editorRef = useRef(null);
   const [isPreview, setIsPreview] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isHtmlModalOpen, setIsHtmlModalOpen] = useState(false);
   const [htmlDraft, setHtmlDraft] = useState('');
   const [showFormattingMarks, setShowFormattingMarks] = useState(false);
+  const [editorReady, setEditorReady] = useState(false);
 
   const editorConfig = useMemo(
     () => ({
@@ -774,6 +767,7 @@ function RichTextEditor({ value, onChange, placeholder = 'Write your article…'
 
   const handleEditorReady = useCallback((editor) => {
     editorRef.current = editor;
+    setEditorReady(true);
   }, []);
 
   const handleTogglePreview = useCallback((editor) => {
@@ -829,6 +823,23 @@ function RichTextEditor({ value, onChange, placeholder = 'Write your article…'
     };
   }, [isFullscreen]);
 
+  useEffect(() => {
+    if (!editorReady) return;
+    const editor = editorRef.current;
+    if (!editor) return;
+    const html = value ?? '';
+    if (lastHtmlRef.current === html) return;
+    editor.update(() => {
+      const parser = new DOMParser();
+      const dom = parser.parseFromString(html || '<p></p>', 'text/html');
+      const nodes = $generateNodesFromDOM(editor, dom);
+      const root = $getRoot();
+      root.clear();
+      root.append(...nodes);
+    });
+    lastHtmlRef.current = html;
+  }, [value, editorReady]);
+
   const containerClass = isFullscreen
     ? 'fixed inset-6 z-[1200] flex flex-col rounded-3xl border border-slate-200 bg-white shadow-2xl'
     : 'flex flex-col';
@@ -866,7 +877,6 @@ function RichTextEditor({ value, onChange, placeholder = 'Write your article…'
           <HorizontalRulePlugin />
           <AutoFocusPlugin />
           <OnChangePlugin onChange={handleChange} />
-          <InitialHtmlPlugin initialHtml={value} lastHtmlRef={lastHtmlRef} />
         </div>
         {showFormattingMarks ? (
           <style>{`.show-formatting p::after{content:'¶';margin-left:0.25rem;color:#94a3b8;} .show-formatting br::after{content:'↵';color:#94a3b8;}`}</style>
