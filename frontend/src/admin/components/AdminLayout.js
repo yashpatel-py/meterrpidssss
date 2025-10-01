@@ -10,10 +10,11 @@ import {
   X,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import AdminLogo from '../../assets/images/header_logo.png';
 
 const navItems = [
-  { label: 'Dashboard', icon: LayoutDashboard, to: '/admin/dashboard' },
-  { label: 'Posts', icon: NotebookPen, to: '/admin/posts' },
+  { label: 'Dashboard', icon: LayoutDashboard, to: '/admin/dashboard', end: true },
+  { label: 'Posts', icon: NotebookPen, to: '/admin/posts', end: true },
   { label: 'Create Post', icon: FilePlus2, to: '/admin/posts/new' },
 ];
 
@@ -41,8 +42,8 @@ function AdminLayout() {
       >
         <div className="flex items-center justify-between px-6 py-6 border-b border-slate-200">
           <Link to="/admin/dashboard" className="flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-primary text-white font-black text-xl">
-              M
+            <span className="grid h-10 w-10 place-items-center rounded-xl bg-white">
+              <img src={AdminLogo} alt="Meteorroids logo" className="h-9 w-auto" />
             </span>
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary/80">
@@ -65,6 +66,7 @@ function AdminLayout() {
             <NavLink
               key={item.to}
               to={item.to}
+              end={item.end}
               className={({ isActive }) =>
                 `flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition ${
                   isActive

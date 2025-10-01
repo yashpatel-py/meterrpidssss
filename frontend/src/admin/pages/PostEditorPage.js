@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { Copy, Lock, RefreshCcw, Unlock } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { fetchJSON } from '../utils/api';
@@ -34,8 +35,14 @@ function PostEditorPage() {
   const [imageMode, setImageMode] = useState('url');
   const [uploadedImage, setUploadedImage] = useState(null);
   const [slugLocked, setSlugLocked] = useState(false);
+  const [slugCopied, setSlugCopied] = useState(false);
 
   const baseUrl = useMemo(() => process.env.REACT_APP_API_BASE_URL || 'http://localhost:4000', []);
+  const blogBaseUrl = useMemo(() => {
+    if (typeof window !== 'undefined' && window.location) {
+      return `${window.location.origin}/blog/`;}
+    return '/blog/';
+  }, []);
 
   const stripHtml = (value) => value.replace(/<[^>]+>/g, ' ');
 
@@ -52,6 +59,41 @@ function PostEditorPage() {
     if (!combined) return '';
     return slugify(combined);
   };
+
+  const toggleSlugLock = () => {
+    setSlugLocked((prev) => !prev);
+  };
+
+  const regenerateSlug = () => {
+    setForm((prev) => {
+      const nextSlug = autoSlug(prev.title, prev.excerpt, prev.content);
+      if (!nextSlug) {
+        return prev;
+      }
+      return { ...prev, slug: nextSlug };
+    });
+    setSlugLocked(false);
+  };
+
+  const handleCopySlug = async () => {
+    if (!form.slug) return;
+    try {
+      await navigator.clipboard.writeText(form.slug);
+      setSlugCopied(true);
+      window.setTimeout(() => setSlugCopied(false), 1500);
+    } catch (err) {
+      console.warn('Unable to copy slug', err);
+    }
+  };
+
+  useEffect(() => {
+    if (!isEditing) {
+      setForm(() => ({ ...emptyForm }));
+      setSlugLocked(false);
+      setImageMode('url');
+      setUploadedImage(null);
+    }
+  }, [isEditing]);
 
   useEffect(() => {
     async function loadMeta() {
@@ -274,6 +316,7 @@ function PostEditorPage() {
           </label>
           <div className="mt-2 overflow-hidden rounded-2xl border border-slate-200 bg-white">
             <RichTextEditor
+              key={isEditing ? id : 'new-post'}
               value={form.content}
               onChange={(html) => {
                 setForm((prev) => {
